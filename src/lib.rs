@@ -1,2 +1,2 @@
-mod mouse;
-use mouse::location;
+pub mod mouse;
+pub use mouse::location;
