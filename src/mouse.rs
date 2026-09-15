@@ -1,24 +1,31 @@
 use std::process::Command;
 use std::str::from_utf8;
-use std::str::split_once;
-pub fn location() -> Result<(i32, i32), Error> {
+pub fn location() -> (i32, i32) {
     match recognize_compositor() {
-        "hyprland" => hyprland_location()?,
-        _ => (),
+        "hyprland" => hyprland_location(),
+        _ => (0, 0),
     }
 }
 
-fn recognize_compositor() -> &str {
+fn recognize_compositor() -> &'static str {
     "hyprland"
 }
 
-fn hyprland_location() -> Result<(i32, i32), Error> {
-    let result = Command::new("hyprctl").arg("cursorpos").output();
+fn hyprland_location() -> (i32, i32) {
+    let result = Command::new("hyprctl").arg("cursorpos").output().unwrap();
+    parse(result.stdout)
 }
 
-fn parse(data: Vec<u8>) {
+// todo: make this idiomatic and safe
+
+fn parse(data: Vec<u8>) -> (i32, i32) {
     // convert bytes to slices
     let data = from_utf8(&data[0..]);
-    let (x, y) = data.split_once(',').unwrap();
-    let x = &x[1..];
+    let (x, y) = data.unwrap().split_once(',').unwrap();
+    let y = &y[1..4];
+    println!("{x}");
+    println!("{y}");
+    let x = x.parse::<i32>().unwrap();
+    let y = y.parse::<i32>().unwrap();
+    (x, y)
 }
