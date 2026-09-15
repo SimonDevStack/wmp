@@ -1,4 +1,4 @@
-> [!NOTE] 
+> [!WARNING] 
 > This is toy project, it's not even close to being stable nor production ready yet, APIs are subjected to change
 
 # wmp; one universal API to get mouse position across multiple wayland compositors
@@ -13,5 +13,7 @@
 
 - KWin
 
-> [!TIP]
-> More comming soon
+
+
+> [!NOTE]
+> More coming soon
