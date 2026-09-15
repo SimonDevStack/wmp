@@ -1,2 +1,2 @@
-pub mod mouse;
-pub use mouse::location;
+pub mod logic;
+pub use logic::location;

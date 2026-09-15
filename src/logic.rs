@@ -1,8 +1,19 @@
-use std::env;
 use std::error::Error;
 use std::io::{Read, Write};
 use std::os::unix::net::UnixStream;
-use std::str::from_utf8;
+
+/// Returns x and y coordinates
+///
+/// # Examples
+/// ```
+/// use wmp::location;
+///
+/// fn main() {
+///     let (x, y) = location().unwrap();
+///     if (x, y) == (100, 100) {
+///         println!("Your cursor is at perfect 100 on x and y axis");
+///     }
+/// }
 pub fn location() -> Result<(i32, i32), Box<dyn Error>> {
     match detect_compositor() {
         "hyprland" => hyprland_location(),
@@ -15,7 +26,6 @@ fn detect_compositor() -> &'static str {
 }
 
 fn hyprland_location() -> Result<(i32, i32), Box<dyn Error>> {
-    // Hyprland Instance Signature (HIS)
     let his = std::env::var("HYPRLAND_INSTANCE_SIGNATURE")?;
     let xdg_runtime = std::env::var("XDG_RUNTIME_DIR")?;
     let path = format!("{}/hypr/{}/.socket.sock", xdg_runtime, his);
