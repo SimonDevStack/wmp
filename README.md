@@ -13,7 +13,7 @@
 
 - KWin
 
-
+- mangowm
 
 > [!NOTE]
 > More coming soon
