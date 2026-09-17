@@ -8,7 +8,7 @@ pub enum Error {
     CompositorUnsupported,
     /// Returned if no XDG_RUNTIME and/or additional compositor specific env vars can be found
     EnvVarNotFound,
-    /// Returned when we either fail to connect to compositor's socket or read/write to it
+    /// Returned when we either fail to connect to compositor's socket or read and write to it
     SocketErr,
 }
 
