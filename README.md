@@ -17,3 +17,6 @@
 
 > [!NOTE]
 > More coming soon
+
+### Documentation 
+https://simondevstack.github.io/wmp/wmp/
